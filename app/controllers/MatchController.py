@@ -2,7 +2,12 @@
 import sys
 import time
 import json
-from win32com.client import Dispatch
+
+if sys.platform == 'win32':
+
+    from win32com.client import Dispatch
+
+
 import pythoncom
 
 from app.models.DB import DB
