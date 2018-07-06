@@ -76,10 +76,10 @@ WSGI_APPLICATION = 'matlab.wsgi.application'
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
 DATABASES = {
-    'sqlite': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    },
+    #'sqlite': {
+    #    'ENGINE': 'django.db.backends.sqlite3',
+    #    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    #},
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'HOST': '47.100.192.196',
