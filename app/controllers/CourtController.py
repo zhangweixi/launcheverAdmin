@@ -1,9 +1,11 @@
 #coding:utf-8
-from pylab import *
-from numpy import *
-from app.models.DB import DB
 
 import sys
+if sys.platform == 'win32':
+    from pylab import *
+    from numpy import *
+
+from app.models.DB import DB
 import json
 import math
 
