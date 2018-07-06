@@ -6,9 +6,8 @@ import json
 if sys.platform == 'win32':
 
     from win32com.client import Dispatch
+    import pythoncom
 
-
-import pythoncom
 
 from app.models.DB import DB
 from common import app
