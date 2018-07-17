@@ -12,14 +12,19 @@ if sys.platform == 'win32':
 from app.models.DB import DB
 from common import app
 
-'''
-开始处理数据
-1.从数据库提取数据组织成json文件
-2.调用matlb系统
-3.matlab将结果存入文件
-4.python从结果中读取数据，分别存入数据库
-'''
+
+
+
 class MatchController():
+    '''
+    开始处理数据
+    1.从数据库提取数据组织成json文件
+    2.调用matlb系统
+    3.matlab将结果存入文件
+    4.python从结果中读取数据，分别存入数据库
+    '''
+
+
 
     matchId = 0
     userId = 0
@@ -208,11 +213,13 @@ class MatchController():
 
         print(result)
 
-    '''
-    #保存结果    
-    '''
+
 
     def save_result(self):
+
+        '''
+        #保存结果
+        '''
 
         # 得到的结果应该达到这样的目的 用户在什么时间，什么地址，完成了什么样的功能
 

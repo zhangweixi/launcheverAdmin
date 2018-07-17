@@ -18,14 +18,14 @@ from django.urls import path,include
 from matlab import urlsapp
 from django.http import HttpResponse
 from app.views import HomeViews
-
+from admin import urls as adminUrls
 
 
 
 #这里是总的url入口，如果想路由到其他地方，那么需要在这里分路由
 urlpatterns = [
     path('',HomeViews.welcome),
-    path('admin/', admin.site.urls),
+    path('admin/<str:module>/<str:method>',adminUrls.adminindex),
     path('matlab', include(urlsapp.urlpatterns))#路由后面不要加/
 ]
 

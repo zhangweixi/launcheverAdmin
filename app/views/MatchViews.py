@@ -13,7 +13,7 @@ from common import app
 def parse_match_data(request):
 
 
-    matchId     = request.GET['matchId']
+    matchiId    = request.GET['matchId']
     userId      = request.GET['userId']
 
     matchController = MatchController(matchId,userId)
@@ -57,6 +57,9 @@ def init_court_data(request):
     court.ready_box_points(courtId)
 
     centerPoint = court.find_which_box(p)
+
+
+
     print(centerPoint)
     #print(centerPoint.lat,centerPoint.lon)
 
