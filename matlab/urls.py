@@ -26,7 +26,8 @@ from admin import urls as adminUrls
 urlpatterns = [
     path('',HomeViews.welcome),
     path('admin/<str:module>/<str:method>',adminUrls.adminindex),
-    path('matlab', include(urlsapp.urlpatterns))#路由后面不要加/
+    path('matlab', include(urlsapp.urlpatterns)),#路由后面不要加/
+    #path('myadmin',admin.site.index),
 ]
 
 

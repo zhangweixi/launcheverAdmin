@@ -4,7 +4,7 @@ from matlab import models
 import hashlib
 import datetime
 import time
-import json
+from common.app import *
 
 
 def login(request):
@@ -13,25 +13,57 @@ def login(request):
     :param request:
     :return:
     '''
-
-    name = request.GET['name']
-    pswd = request.GET['password']
+    name = request.POST.get('name','')
+    pswd = request.POST.get('password','')
     pswd = get_password(pswd)
 
 
-    #adminInfo = models.Admin.objects.filter(name=name).filter(password=pswd).get()
-    adminInfo = models.Admin.objects.filter(name=name).filter(password=pswd).values()
+    try:
+        adminInfo = models.Admin.objects.filter(name=name).filter(password=pswd).get()
 
-    print(adminInfo)
+    except models.Admin.DoesNotExist:
 
-    return ApiData() \
-        .add('info',list(adminInfo))\
-        .send()
+        adminInfo = None
 
 
+    if adminInfo == None:
+
+        return ApiData().send(2001,"登录失败")
+
+    #刷新token
+
+    adminInfo.token = random_str(30)
+    adminInfo.save()
+
+    adminInfo = adminInfo.toJSON()
+
+    return ApiData().add('adminInfo',adminInfo).add('name',name).send()
 
 
 
+
+def get_admin_info_by_token(request):
+    """
+    根据token获取管理员信息
+    :param request:
+    :return:
+    """
+    token = request.GET.get('token','')
+
+    try:
+        adminInfo = models.Admin.objects.filter(token=token).get()
+
+    except models.Admin.DoesNotExist:
+
+        adminInfo = None
+
+    if adminInfo == None:
+        return ApiData().send(2001,'管理员不存在')
+
+
+    adminInfo = adminInfo.toJSON()
+
+    return ApiData().add('admin',adminInfo).send()
 
 
 def get_password(password):

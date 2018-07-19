@@ -18,5 +18,9 @@ class ApiData:
 
     def send(self, code=200, message="SUCCESS"):
 
+        if len(self.__data) == 0:
+
+            self.__data = None
+
         data = {"code":code,"msg":message,"data":self.__data}
         return JsonResponse(data,safe=False)

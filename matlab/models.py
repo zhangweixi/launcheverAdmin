@@ -5,15 +5,17 @@
 #   * Make sure each ForeignKey has `on_delete` set to the desired behavior.
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
+from . import mymodels
 from django.db import models
 
 
-class Admin(models.Model):
+class Admin(models.Model,mymodels.mymodels):
     admin_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255)
     password = models.CharField(max_length=255)
     real_name = models.CharField(max_length=255, blank=True, null=True)
     mobile = models.CharField(max_length=255, blank=True, null=True)
+    token = models.CharField(max_length=255, blank=True, null=True)
     created_at = models.DateTimeField(blank=True, null=True)
     updated_at = models.DateTimeField(blank=True, null=True)
 
@@ -22,7 +24,7 @@ class Admin(models.Model):
         db_table = 'admin'
 
 
-class ApiData(models.Model):
+class ApiData(models.Model,mymodels.mymodels):
     url = models.CharField(max_length=255)
     data = models.TextField()
     created_at = models.DateTimeField()
@@ -32,7 +34,7 @@ class ApiData(models.Model):
         db_table = 'api_data'
 
 
-class Device(models.Model):
+class Device(models.Model,mymodels.mymodels):
     device_id = models.AutoField(primary_key=True)
     device_sn = models.CharField(max_length=255)
     saled_at = models.DateTimeField()
@@ -52,7 +54,7 @@ class Device(models.Model):
         db_table = 'device'
 
 
-class FailedJobs(models.Model):
+class FailedJobs(models.Model,mymodels.mymodels):
     id = models.BigAutoField(primary_key=True)
     connection = models.TextField()
     queue = models.TextField()
@@ -65,7 +67,7 @@ class FailedJobs(models.Model):
         db_table = 'failed_jobs'
 
 
-class FootballCourt(models.Model):
+class FootballCourt(models.Model,mymodels.mymodels):
     court_id = models.AutoField(primary_key=True)
     user_id = models.IntegerField()
     lat = models.FloatField()
@@ -89,7 +91,7 @@ class FootballCourt(models.Model):
         db_table = 'football_court'
 
 
-class Match(models.Model):
+class Match(models.Model,mymodels.mymodels):
     match_id = models.AutoField(primary_key=True)
     user_id = models.IntegerField()
     court_id = models.IntegerField()
@@ -116,7 +118,7 @@ class Match(models.Model):
         db_table = 'match'
 
 
-class MatchGps(models.Model):
+class MatchGps(models.Model,mymodels.mymodels):
     gps_id = models.AutoField(primary_key=True)
     match_id = models.IntegerField()
     latitude = models.CharField(max_length=200, blank=True, null=True)
@@ -135,7 +137,7 @@ class MatchGps(models.Model):
         db_table = 'match_gps'
 
 
-class MatchResult(models.Model):
+class MatchResult(models.Model,mymodels.mymodels):
     match_id = models.AutoField(primary_key=True)
     shoot_speed_max = models.IntegerField()
     shoot_speed_avg = models.IntegerField()
@@ -166,7 +168,7 @@ class MatchResult(models.Model):
         db_table = 'match_result'
 
 
-class MatchSensor(models.Model):
+class MatchSensor(models.Model,mymodels.mymodels):
     sensor_id = models.AutoField(primary_key=True)
     match_id = models.IntegerField()
     x = models.FloatField(blank=True, null=True)
@@ -184,7 +186,7 @@ class MatchSensor(models.Model):
         db_table = 'match_sensor'
 
 
-class MatchSourceData(models.Model):
+class MatchSourceData(models.Model,mymodels.mymodels):
     match_source_id = models.AutoField(primary_key=True)
     type = models.CharField(max_length=255)
     user_id = models.IntegerField()
@@ -198,7 +200,7 @@ class MatchSourceData(models.Model):
         db_table = 'match_source_data'
 
 
-class MatchStatus(models.Model):
+class MatchStatus(models.Model,mymodels.mymodels):
     status_id = models.AutoField(primary_key=True)
     match_id = models.IntegerField()
     status = models.CharField(max_length=255)
@@ -209,7 +211,7 @@ class MatchStatus(models.Model):
         db_table = 'match_status'
 
 
-class Migrations(models.Model):
+class Migrations(models.Model,mymodels.mymodels):
     migration = models.CharField(max_length=255)
     batch = models.IntegerField()
 
@@ -218,7 +220,7 @@ class Migrations(models.Model):
         db_table = 'migrations'
 
 
-class ShequMatch(models.Model):
+class ShequMatch(models.Model,mymodels.mymodels):
     sq_match_id = models.AutoField(primary_key=True)
     user_id = models.IntegerField()
     begin_time = models.DateTimeField()
@@ -237,7 +239,7 @@ class ShequMatch(models.Model):
         db_table = 'shequ_match'
 
 
-class UserGlobalAbility(models.Model):
+class UserGlobalAbility(models.Model,mymodels.mymodels):
     user_id = models.IntegerField(unique=True)
     shoot = models.IntegerField()
     pass_field = models.IntegerField(db_column='pass')  # Field renamed because it was a Python reserved word.
@@ -251,7 +253,7 @@ class UserGlobalAbility(models.Model):
         db_table = 'user_global_ability'
 
 
-class UserMobileCode(models.Model):
+class UserMobileCode(models.Model,mymodels.mymodels):
     status = models.IntegerField()
     mobile = models.CharField(max_length=255)
     code = models.CharField(max_length=255)
@@ -266,7 +268,7 @@ class UserMobileCode(models.Model):
         db_table = 'user_mobile_code'
 
 
-class UserSuggestion(models.Model):
+class UserSuggestion(models.Model,mymodels.mymodels):
     user_id = models.CharField(max_length=255)
     type = models.CharField(max_length=255)
     name = models.CharField(max_length=255)
@@ -281,7 +283,7 @@ class UserSuggestion(models.Model):
         db_table = 'user_suggestion'
 
 
-class UserUseLog(models.Model):
+class UserUseLog(models.Model,mymodels.mymodels):
     log_id = models.AutoField(primary_key=True)
     user_id = models.IntegerField()
     lat = models.CharField(max_length=255)
@@ -296,7 +298,7 @@ class UserUseLog(models.Model):
         db_table = 'user_use_log'
 
 
-class Users(models.Model):
+class Users(models.Model,mymodels.mymodels):
     name = models.CharField(max_length=20, blank=True, null=True)
     nick_name = models.CharField(max_length=255, blank=True, null=True)
     wx_openid = models.CharField(max_length=255, blank=True, null=True)
